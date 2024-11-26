@@ -49,13 +49,19 @@ input[type="submit"] {
   font-weight: bold;
   font-size: 1.1em;
   cursor: pointer;
-  transition: 0,4s;
+  transition: 0.4s;
 }
 
 input[type="submit"]:hover {
   color: #dec129;
-  border: #dec129;
+  border: 2px solid #dec129;
   background-color: transparent;
+  transition: 0.3s;
 }
 
-
+.validation-error p {
+  color: #dc3545;
+  margin-top: 0.4em;
+  border-left: 3px solid #dc3545;
+  padding-left: 0.2em;
+}
