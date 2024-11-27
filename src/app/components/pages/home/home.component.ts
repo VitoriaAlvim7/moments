@@ -3,6 +3,8 @@ import { Moment } from 'src/app/Moment';
 import { MomentService } from 'src/app/services/moment.service';
 import { environment } from 'src/environments/environment';
 
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +15,8 @@ export class HomeComponent implements OnInit {
   moments: Moment[] = [];
   baseApiUrl = environment.baseApiUrl;
 
-  //to do search
+  faSearch = faSearch;
+  searchTerm: string = '';
 
   constructor(private momentService: MomentService) {}
 
@@ -28,6 +31,15 @@ export class HomeComponent implements OnInit {
       });
       this.allMoments = data;
       this.moments = data;
+    });
+  }
+
+  search(e: Event): void {
+    const target = e.target as HTMLInputElement;
+    const value = target.value;
+
+    this.moments = this.allMoments.filter((moment) => {
+      return moment.title.toLowerCase().includes(value);
     });
   }
 }
