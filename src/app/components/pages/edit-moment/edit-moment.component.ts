@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'src/app/Moment';
-import { MomentService } from 'src/app/services/moment.service';
 import { MessagesService } from 'src/app/services/messages.service';
-import { Title } from '@angular/platform-browser';
+import { MomentService } from 'src/app/services/moment.service';
 
 @Component({
   selector: 'app-edit-moment',
@@ -18,7 +17,7 @@ export class EditMomentComponent implements OnInit {
     private momentService: MomentService,
     private route: ActivatedRoute,
     private messagesService: MessagesService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,19 +30,20 @@ export class EditMomentComponent implements OnInit {
 
   async editHandler(momentData: Moment) {
     const id = this.moment.id;
-    const formData = new FormData()
+    const formData = new FormData();
 
-    formData.append('title', momentData.title)
-    formData.append('description', momentData.description)
+    formData.append('title', momentData.title);
+    formData.append('description', momentData.description);
 
     if (momentData.image) {
-      formData.append('image', momentData.image)
+      formData.append('image', momentData.image);
     }
 
-    await this.momentService.updateMoment(id!, formData).subscribe()
+    await this.momentService.updateMoment(id!, formData).subscribe();
 
-
-    this.messagesService.add(`Moment ${id} '${this.moment.title}' foi atualizado com sucesso!`);
+    this.messagesService.add(
+      `Moment ${id} '${this.moment.title}' foi atualizado com sucesso!`
+    ); //Talvez implementar uma funcionalidade para aparecer se e quando esse momento foi editado
 
     this.router.navigate(['/']);
   }
